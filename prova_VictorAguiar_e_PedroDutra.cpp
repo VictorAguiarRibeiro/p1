@@ -28,6 +28,87 @@ struct Consulta
 
 };
 
+struct Meta
+{
+    string objetivo = " ";
+    string evolucao = " ";
+    string resultado = " ";
+
+};
+
+struct Alimentacao
+{
+    string cafemanha = " ";
+    string lanchemanha = " ";
+    string almoco = " ";
+    string lanchetarde = " ";
+    string janta = " ";
+    string ceia = " ";
+};
+
+void split(string linha, char at, string S[])
+{
+    int pos = 0, fim, i=0;
+
+    do
+    {
+        fim=linha.find(at, pos);
+        if (fim == -1) // Ultimo campo
+            S[i] = linha.substr(pos);
+        else // Primeiro ao penúltimo campo
+        {
+            S[i++] = linha.substr(pos, fim - pos);
+            pos = fim+1;
+        }
+    } while (fim != -1);
+}
+
+void carregaDados(vector<Cliente>&Ct , vector<Alimentacao>&A , vector<Consulta>&Co , vector<Meta>&M)
+{
+    string linha;
+    ifstream arquivo;
+    Cliente ct;
+    Alimentacao a;
+    Consulta co;
+    Meta m;
+
+    arquivo.open("dados.txt");
+    if (arquivo.is_open()){
+        while (getline (arquivo,linha)){
+             cout << linha << '\n';
+             string S[18];
+             split(linha, ',', S);
+             ct.nome = S[0];
+             ct.peso = S[1];
+             ct.idade = S[2];
+             ct.altura = S[3];
+             ct.genero = S[4];
+             ct.motivacao = S[5];
+             a.cafemanha = S[6];
+             a.lanchemanha = S[7];
+             a.almoco = S[8];
+             a.lanchetarde = S[9];
+             a.janta = S[10];
+             a.ceia = S[11];
+             co.data = S[12];
+             co.horario = S[13];
+             co.duracao = S[14];
+             co.tipo = S[15];
+             m.objetivo = S[16];
+             m.evolucao = S[17];
+             m.resultado = S[18];
+
+             Ct.push_back(ct);
+             A.push_back(a);
+             Co.push_back(co);
+             M.push_back(m);
+        }
+        arquivo.close();
+    } else {
+    cout << "Não foi possível abrir o arquivo!!!";
+    }
+}
+
 void salvaDados(vector<Cliente> Ct , vector<Alimentacao> A , vector<Consulta> Co , vector<Meta> M){
     ofstream arquivo;
     arquivo.open("dados.txt", ios::app );
@@ -177,6 +258,114 @@ void alteraMeta(string nome , vector<Cliente> Ct , vector<Alimentacao> A , vecto
 
 }
 
+void verMeta(string nome , vector<Cliente> Ct , vector<Alimentacao> A , vector<Consulta> Co , vector<Meta> M){
+
+    int aux;
+
+    ofstream arquivoS;
+    arquivoS.open("dados.txt");
+    for(int i = 0; i < Ct.size(); i++){
+
+        if (Ct[i].nome == nome)
+        {
+            system("cls");
+
+            cout << "Objetivo: " << M[aux].objetivo << endl
+            << "Evolução: " << M[aux].evolucao << endl
+            << "Resultado: " << M[aux].resultado << endl;
+
+
+        }else{
+            system("cls");
+            cout << "Cliente não encontrado, favor verificar ortografia!" << endl;
+            exit;
+        }
+    }
+
+}
+
+void preencheDados()
+{
+    setlocale(LC_ALL , "Portuguese");
+    system("cls");
+
+    Cliente ct;
+    Alimentacao a;
+    Consulta co;
+    Meta m;
+
+    cout << "\t--Insira os dados do Cliente--" << endl << endl
+     << "Nome: ";
+    cin >> ct.nome;
+    cout << endl << "Peso: ";
+    cin >> ct.peso;
+    cout << endl << "Idade: ";
+    cin >> ct.idade;
+    cout << endl << "Altura: ";
+    cin >> ct.altura;
+    cout << endl << "Gênero: ";
+    cin >> ct.genero;
+    cout << endl << "Motivação: ";
+    cin >> ct.motivacao;
+
+    system("cls");
+
+    cout << "\t--Ficha de Alimentação--" << endl << endl
+     << "Café da manhã: ";
+    cin >> a.cafemanha;
+    cout << endl << "Lanche da Manha: ";
+    cin >> a.lanchemanha;
+    cout << endl << "Almoço: ";
+    cin >> a.almoco;
+    cout << endl << "Lanche da Tarde: ";
+    cin >> a.lanchetarde;
+    cout << endl << "Janta: ";
+    cin >> a.janta;
+    cout << endl << "Ceia: ";
+    cin >> a.ceia;
+
+    system("cls");
+
+    cout << "\t--Insira os dados da Consulta--" << endl << endl
+     << "Data: ";
+    cin >> co.data;
+    cout << endl << "Horário: ";
+    cin >> co.horario;
+    cout << endl << "Duração: ";
+    cin >> co.duracao;
+    cout << endl << "Tipo: ";
+    cin >> co.tipo;
+
+    system("cls");
+
+    cout << "\t--Meta--" << endl << endl
+     << "Objetivo: ";
+    cin >> m.objetivo;
+    cout << endl << "Evolução: ";
+    cin >> m.evolucao;
+    cout << endl << "Resultado: ";
+    cin >> m.resultado;
+
+    system("cls");
+
+    ofstream arquivo;
+    arquivo.open("dados.txt", ios::app );
+
+    arquivo << ct.nome << "," << ct.peso
+         << "," << ct.idade << ","
+         << ct.altura << "," << ct.genero << "," << ct.motivacao << ","
+         << a.cafemanha << "," << a.lanchemanha
+         << "," << a.almoco << ","
+         << a.lanchetarde << "," << a.janta << "," << a.ceia << ","
+         << co.data << "," << co.horario
+         << "," << co.duracao << ","
+         << co.tipo << ","
+         << m.objetivo << "," << m.evolucao
+         << "," << m.resultado << endl;
+
+    arquivo.close();
+}
+
 int main()
 {
 	setlocale(LC_ALL , "Portuguese");
@@ -194,6 +383,55 @@ int main()
         << endl << "5 - Alterar (Meta)" << endl << "6 - Ver metas" << endl << "0 - SAIR" << endl << endl << "Digite: ";
 
         cin >> aux;
+	    
+	switch(aux)
+        {
+        case 1:
+            {
+                preencheDados();
+            }break;
+        case 2:
+            {
+                carregaDados(Ct , A , Co, M);
+            }break;
+        case 3:
+            {
+                salvaDados(Ct , A , Co, M);
+            }break;
+        case 4:
+            {
+                system("cls");
+                string nometroca;
+                cout << "Digite o nome do cliente: ";
+                cin >> nometroca;
+
+                carregaDados(Ct , A , Co, M);
+                alteraAlimentacao(nometroca , Ct , A , Co , M);
+
+            }break;
+        case 5:
+            {
+                system("cls");
+                string nometroca;
+                cout << "Digite o nome do cliente: ";
+                cin >> nometroca;
+
+                carregaDados(Ct , A , Co, M);
+                alteraMeta(nometroca , Ct , A , Co , M);
+
+            }break;
+        case 6:
+            {
+                system("cls");
+                string nometroca;
+                cout << "Digite o nome do cliente: ";
+                cin >> nometroca;
+
+                carregaDados(Ct , A , Co, M);
+                verMeta(nometroca , Ct , A , Co , M);
+
+            }break;
+        }
         
         system("cls");
 
