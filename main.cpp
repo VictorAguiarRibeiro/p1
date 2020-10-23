@@ -39,9 +39,9 @@ struct Meta
 struct Alimentacao
 {
     string cafemanha = " ";
-    string lanchemanha = " ";
+    string lanche1 = " ";
     string almoco = " ";
-    string lanchetarde = " ";
+    string lanche2 = " ";
     string janta = " ";
     string ceia = " ";
 };
@@ -55,7 +55,7 @@ void split(string linha, char at, string S[])
         fim=linha.find(at, pos);
         if (fim == -1) // Ultimo campo
             S[i] = linha.substr(pos);
-        else // Primeiro ao penúltimo campo
+        else // Primeiro ao penÃºltimo campo
         {
             S[i++] = linha.substr(pos, fim - pos);
             pos = fim+1;
@@ -105,7 +105,7 @@ void carregaDados(vector<Cliente>&Ct , vector<Alimentacao>&A , vector<Consulta>&
         }
         arquivo.close();
     } else {
-    cout << "Não foi possível abrir o arquivo!!!";
+    cout << "NÃ£o foi possÃ­vel abrir o arquivo!!!";
     }
 }
 
@@ -151,19 +151,19 @@ void alteraAlimentacao(string nome , vector<Cliente> Ct , vector<Alimentacao> A 
             aux = i;
         }else{
             system("cls");
-            cout << "Cliente não encontrado, favor verificar ortografia!" << endl;
+            cout << "Cliente nÃ£o encontrado, favor verificar ortografia!" << endl;
             exit;
         }
     }
 
     system("cls");
 
-    cout << "\t--Ficha de Alimentação--" << endl << endl
-     << "Café da manhã: ";
+    cout << "\t--Ficha de AlimentaÃ§Ã£o--" << endl << endl
+     << "CafÃ© da manhÃ£: ";
     cin >> A[aux].cafemanha;
     cout << endl << "Lanche da Manha: ";
     cin >> A[aux].lanchemanha;
-    cout << endl << "Almoço: ";
+    cout << endl << "AlmoÃ§o: ";
     cin >> A[aux].almoco;
     cout << endl << "Lanche da Tarde: ";
     cin >> A[aux].lanchetarde;
@@ -214,7 +214,7 @@ void alteraMeta(string nome , vector<Cliente> Ct , vector<Alimentacao> A , vecto
             aux = i;
         }else{
             system("cls");
-            cout << "Cliente não encontrado, favor verificar ortografia!" << endl;
+            cout << "Cliente nÃ£o encontrado, favor verificar ortografia!" << endl;
             exit;
         }
     }
@@ -224,7 +224,7 @@ void alteraMeta(string nome , vector<Cliente> Ct , vector<Alimentacao> A , vecto
     cout << "\t--Meta--" << endl << endl
      << "Objetivo: ";
     cin >> M[aux].objetivo;
-    cout << endl << "Evolução: ";
+    cout << endl << "EvoluÃ§Ã£o: ";
     cin >> M[aux].evolucao;
     cout << endl << "Resultado: ";
     cin >> M[aux].resultado;
@@ -271,13 +271,13 @@ void verMeta(string nome , vector<Cliente> Ct , vector<Alimentacao> A , vector<C
             system("cls");
 
             cout << "Objetivo: " << M[aux].objetivo << endl
-            << "Evolução: " << M[aux].evolucao << endl
+            << "EvoluÃ§Ã£o: " << M[aux].evolucao << endl
             << "Resultado: " << M[aux].resultado << endl;
 
 
         }else{
             system("cls");
-            cout << "Cliente não encontrado, favor verificar ortografia!" << endl;
+            cout << "Cliente nÃ£o encontrado, favor verificar ortografia!" << endl;
             exit;
         }
     }
@@ -303,19 +303,19 @@ void preencheDados()
     cin >> ct.idade;
     cout << endl << "Altura: ";
     cin >> ct.altura;
-    cout << endl << "Gênero: ";
+    cout << endl << "GÃªnero: ";
     cin >> ct.genero;
-    cout << endl << "Motivação: ";
+    cout << endl << "MotivaÃ§Ã£o: ";
     cin >> ct.motivacao;
 
     system("cls");
 
-    cout << "\t--Ficha de Alimentação--" << endl << endl
-     << "Café da manhã: ";
+    cout << "\t--Ficha de AlimentaÃ§Ã£o--" << endl << endl
+     << "CafÃ© da manhÃ£: ";
     cin >> a.cafemanha;
     cout << endl << "Lanche da Manha: ";
     cin >> a.lanchemanha;
-    cout << endl << "Almoço: ";
+    cout << endl << "AlmoÃ§o: ";
     cin >> a.almoco;
     cout << endl << "Lanche da Tarde: ";
     cin >> a.lanchetarde;
@@ -329,9 +329,9 @@ void preencheDados()
     cout << "\t--Insira os dados da Consulta--" << endl << endl
      << "Data: ";
     cin >> co.data;
-    cout << endl << "Horário: ";
+    cout << endl << "HorÃ¡rio: ";
     cin >> co.horario;
-    cout << endl << "Duração: ";
+    cout << endl << "DuraÃ§Ã£o: ";
     cin >> co.duracao;
     cout << endl << "Tipo: ";
     cin >> co.tipo;
@@ -341,7 +341,7 @@ void preencheDados()
     cout << "\t--Meta--" << endl << endl
      << "Objetivo: ";
     cin >> m.objetivo;
-    cout << endl << "Evolução: ";
+    cout << endl << "EvoluÃ§Ã£o: ";
     cin >> m.evolucao;
     cout << endl << "Resultado: ";
     cin >> m.resultado;
@@ -377,9 +377,9 @@ int main()
     vector<Meta> M;
 
     do{
-        cout << "\t-- Clinica de Nutrição --\n" << endl
+        cout << "\t-- Clinica de NutriÃ§Ã£o --\n" << endl
         << "1 - Preencher dados" << endl << "2 - Carregar dados"
-        << endl << "3 - Salvar dados" << endl << "4 - Alterar (Ficha de Alimentação)"
+        << endl << "3 - Salvar dados" << endl << "4 - Alterar (Ficha de AlimentaÃ§Ã£o)"
         << endl << "5 - Alterar (Meta)" << endl << "6 - Ver metas" << endl << "0 - SAIR" << endl << endl << "Digite: ";
 
         cin >> aux;
